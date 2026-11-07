@@ -1,49 +1,31 @@
-# Jovenra Ludo Royale V4
+# Jovenra Ludo · V5 browser edition
 
-A premium, responsive, browser-based Ludo experience for JovenraLabs.
+Original responsive Ludo game with reference-led classic gameplay. This project is **not** affiliated with Ludo King and does not copy its trademarks, artwork, code or sound assets.
 
-## Play locally
+## Available screens
+1. Launch screen and lobby.
+2. VS Computer or Pass & Play selection (offline only).
+3. Two-player / four-player setup.
+4. Classic, Quick, and 1 Kill Win mode selection.
+5. Token color selection.
+6. Match board, dice, player panels, tutorial, move and capture animations.
+7. Settings, pause, quit confirmation, winner screen and local match resume.
 
-This first GitHub commit contains a **fully standalone** `index.html` (CSS, JavaScript, visuals and original audio embedded).
+The user-supplied recording was used to study the generic flow and board conventions. All assets and sounds in this game are original. No advertisements, online opponents, login, purchases or rewarded ad flows are shown.
 
-- Download the repository or clone it.
-- Open `index.html` in a modern browser.
-- Choose **Enter the Arena**, start a match and enjoy.
+## Run
+The top-level `index.html` is self-contained. Open it directly in a modern browser or serve it locally via `python -m http.server 8080`. All local gameplay works without an account or backend.
 
-For local HTTP hosting:
+## Cloudflare
+`public/index.html` is a self-contained production bundle used by `wrangler.jsonc` for Workers Static Assets. Main branch commits trigger connected Cloudflare builds. Custom domain: `play.jovenralabs.in`. The AdSense publisher verification script remains in `<head>`; this is **not** an ad unit or approval.
 
-```powershell
-py -m http.server 8080
-```
+## Verified in development
+- Nine game-rule unit tests passed, including exact home, captures and three sixes.
+- Chromium browser checks: 320px, 390px, 820px, 1440px (no horizontal overflow or JavaScript errors).
+- Dice orientation checks: actual visible pips match values 1–6, without a last-frame texture change.
+- Pawn enters and hops three consecutive cells; settings, pass-and-play and quit confirmation passed.
 
-Visit `http://localhost:8080`.
-
-## Features
-
-- Four-color Ludo game with computer challengers and pass-and-play friends
-- Three-dimensional dice animation with a result that stays consistent
-- Dice rolling and landing effects, plus relaxing original music (starts after the first interaction due to browser audio policies)
-- Pawns hop from square to square
-- Responsive layout across phones, tablets and desktop devices
-
-## Deploy with Cloudflare Pages
-
-Create a dedicated Cloudflare Pages project with the **GitHub integration** connected to this repository:
-
-- **Production branch:** `main`
-- **Framework preset:** None
-- **Build command:** Leave blank (no build necessary)
-- **Build output directory:** `/` (repository root; Cloudflare's no-build root directory option)
-- **Root directory:** Repository root
-
-Then use **Pages → Custom domains** for the intended subdomain.
-
-Do not replace the existing `jovenralabs.in` website project. If `play.jovenralabs.in` already serves the game portal, do not repoint its DNS record until the existing routing is reviewed; `ludo.jovenralabs.in` is a safer standalone option.
-
-## Current scope
-
-This is the single-device browser edition with bots and local players, **not yet** real-time multiplayer with private online rooms. The initial repository upload is a bundled standalone file; editable modular sources can be added separately.
-
-## License
-
-Copyright JovenraLabs. All rights reserved. The project is not affiliated with Ludo King.
+## Notes
+- Music starts only after a user click/tap because of browser autoplay policies.
+- This upload is a standalone production artifact; modular editable source and test bundle can be maintained separately.
+- It has not been verified on every physical phone or browser.
