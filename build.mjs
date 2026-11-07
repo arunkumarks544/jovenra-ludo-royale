@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const html=fs.readFileSync('source.html','utf8');
+const css=fs.readFileSync('src/style.css','utf8');
+const engine=fs.readFileSync('src/engine.js','utf8').replaceAll('export ','').replace('function location(', 'function tokenLocation(');
+const main=fs.readFileSync('src/main.js','utf8').replace(/^import .* from '\\.\\/engine\\.js';\\s*/,'');
+if(main.startsWith('import '))throw Error('Source import was not resolved');
+const result=html.replace('<link rel="stylesheet" href="/src/style.css">',`<style>\\n${css}\\n</style>`).replace('<script type="module" src="/src/main.js"></script>',`<script>\\n${engine}\\n${main}\\n</script>`);
+fs.mkdirSync('public',{recursive:true});fs.writeFileSync('public/index.html',result);
+fs.writeFileSync('index.html',result);
+console.log('Built static game:',Math.round(Buffer.byteLength(result)/1024)+'KiB');
