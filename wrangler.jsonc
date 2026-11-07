@@ -3,5 +3,11 @@
   "compatibility_date": "2026-11-07",
   "assets": {
     "directory": "./public"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "play.jovenralabs.in",
+      "custom_domain": true
+    }
+  ]
 }
